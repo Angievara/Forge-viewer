@@ -1,0 +1,122 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: ArtifaktElement;
+}
+
+#header,
+#preview,
+#overlay {
+    width: 100%;
+}
+
+#header {
+    height: fit-content;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#preview,
+#overlay {
+    top: 3em;
+    bottom: 0;
+}
+
+#overlay {
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    display: none;
+}
+
+#overlay>.notification {
+    margin: auto;
+    padding: 1em;
+    max-width: 50%;
+    background: white;
+}
+
+#header>* {
+    height: 2em;
+    margin: 0 0.5em;
+    font-size: 1em;
+    font-family: ArtifaktElement;
+}
+
+#header .title {
+    flex: 1 0 auto;
+    height: auto;
+}
+
+#models {
+    flex: 0 1 auto;
+    min-width: 2em;
+}
+
+#header .logo {
+    height: 80px;
+}
+
+.icon,
+.icon1,
+.icon2,
+.icon3,
+.icon4,
+.icon5,
+.icon6,
+.icon7,
+.icon8,
+.icon9,
+.icon10,
+.icon11 {
+    background-image: url('https://img.icons8.com/small/32/brief.png');
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.icon{
+    background-color: aliceblue;
+}
+.icon1{
+    background-color: aqua;
+}
+.icon2{
+    background-color: aquamarine;
+}
+.icon3{
+    background-color: azure;
+}
+.icon4{
+    background-color: beige;
+}
+.icon5{
+    background-color: bisque;
+}
+.icon6{
+    background-color: blanchedalmond;
+}
+.icon7{
+    background-color: blue;
+}
+.icon8{
+    background-color: blueviolet;
+}
+.icon9{
+    background-color: brown;
+}
+.icon10{
+    background-color: burlywood;
+}
+.icon11{
+    background-color: cadetblue;
+}
+
+html body #preview .adsk-viewing-viewer {
+    height: 80%;
+}

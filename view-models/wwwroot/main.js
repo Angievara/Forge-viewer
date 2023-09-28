@@ -2,6 +2,7 @@ import { initViewer, loadModel } from './viewer.js';
 
 initViewer(document.getElementById('preview')).then(viewer => {
     const urn = window.location.hash?.substring(1);
+    console.log(viewer);
     setupModelSelection(viewer, urn);
     setupModelUpload(viewer);
 });

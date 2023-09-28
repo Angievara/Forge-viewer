@@ -1,4 +1,5 @@
 /// import * as Autodesk from "@types/forge-viewer";
+import './extensions/LoggerExtension.js';
 
 async function getAccessToken(callback) {
     try {
@@ -18,18 +19,21 @@ export function initViewer(container) {
     return new Promise(function (resolve, reject) {
         Autodesk.Viewing.Initializer({ getAccessToken }, function () {
             const config = {
-                extensions: ['Autodesk.DocumentBrowser']
+                extensions: ['LoggerExtension']
             };
             const viewer = new Autodesk.Viewing.GuiViewer3D(container, config);
+            
             viewer.start();
             viewer.setTheme('light-theme');
             resolve(viewer);
+           
         });
     });
 }
 
 export function loadModel(viewer, urn) {
     return new Promise(function (resolve, reject) {
+        
         function onDocumentLoadSuccess(doc) {
             resolve(viewer.loadDocumentNode(doc, doc.getRoot().getDefaultGeometry()));
         }
