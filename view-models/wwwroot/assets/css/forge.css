@@ -4903,3 +4903,7 @@
     padding-top: 50%;
     border-bottom-width: 1px;
   }
+
+  /* html body #preview .adsk-viewing-viewer #guiviewer3d-toolbar #navTools #toolbar-orbitTools .adsk-button-icon .adsk-icon-orbit-constrained{
+    background-image: url( "../images/360.svg" ) !important;
+  } */

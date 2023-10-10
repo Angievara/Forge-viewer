@@ -7,6 +7,7 @@ let router = express.Router();
 router.get('/api/models', async function (req, res, next) {
     try {
         const objects = await listObjects();
+        console.log(objects)
         res.json(objects.map(o => ({
             name: o.objectKey,
             urn: urnify(o.objectId)
@@ -40,7 +41,7 @@ router.get('/api/models/:urn/status', async function (req, res, next) {
     }
 });
 
-router.post('/api/models', formidable(), async function (req, res, next) {
+router.post('/api/models', formidable({ maxFileSize: 400 * 1024 * 1024 }), async function (req, res, next) {
     const file = req.files['model-file'];
     if (!file) {
         res.status(400).send('The required field ("model-file") is missing.');
@@ -54,6 +55,7 @@ router.post('/api/models', formidable(), async function (req, res, next) {
             urn: urnify(obj.objectId)
         });
     } catch (err) {
+        console.log("API", err)
         next(err);
     }
 });

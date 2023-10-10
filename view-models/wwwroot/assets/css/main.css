@@ -58,65 +58,55 @@ html {
 }
 
 #header .logo {
-    height: 80px;
-}
-
-.icon,
-.icon1,
-.icon2,
-.icon3,
-.icon4,
-.icon5,
-.icon6,
-.icon7,
-.icon8,
-.icon9,
-.icon10,
-.icon11 {
-    background-image: url('https://img.icons8.com/small/32/brief.png');
-    background-size: 24px;
-    background-repeat: no-repeat;
-    background-position: center;
-
+    height: 120px;
+    width: auto;
 }
 
 .icon{
-    background-color: aliceblue;
-}
-.icon1{
-    background-color: aqua;
-}
-.icon2{
-    background-color: aquamarine;
-}
-.icon3{
-    background-color: azure;
-}
-.icon4{
-    background-color: beige;
-}
-.icon5{
-    background-color: bisque;
-}
-.icon6{
-    background-color: blanchedalmond;
-}
-.icon7{
-    background-color: blue;
-}
-.icon8{
-    background-color: blueviolet;
-}
-.icon9{
-    background-color: brown;
-}
-.icon10{
-    background-color: burlywood;
-}
-.icon11{
-    background-color: cadetblue;
+
+    background-image: url("../images/360.svg")
 }
 
-html body #preview .adsk-viewing-viewer {
-    height: 80%;
+.icon1 {
+    background-image: url("../images/hand-grab.svg")
+}
+
+.icon2 {
+    background-image: url("../images/zoom-pan.svg")
+}
+
+.icon3 {
+    background-image: url("../images/walk.svg")
+}
+
+.icon4 {
+    background-image: url("../images/video.svg")
+}
+
+.icon5 {
+    background-image: url("../images/ruler-measure.svg")
+}
+
+.icon6 {
+    background-image: url("../images/section.svg")
+}
+
+.icon7 {
+    background-image: url("../images/brand-airtable.svg")
+}
+
+.icon8 {
+    background-image: url("../images/binary-tree-2.svg")
+}
+
+.icon9 {
+    background-image: url("../images/eye-table.svg")
+}
+
+.icon10 {
+    background-image: url("../images/adjustments-horizontal.svg")
+}
+
+.icon11 {
+    background-image: url("../images/window-maximize.svg")
 }

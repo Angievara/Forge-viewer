@@ -18,8 +18,9 @@ async function getAccessToken(callback) {
 export function initViewer(container) {
     return new Promise(function (resolve, reject) {
         Autodesk.Viewing.Initializer({ getAccessToken }, function () {
+            // extensions: ['LoggerExtension']
             const config = {
-                extensions: ['LoggerExtension']
+                extensions:  ['Autodesk.DocumentBrowser', 'LoggerExtension']
             };
             const viewer = new Autodesk.Viewing.GuiViewer3D(container, config);
             
