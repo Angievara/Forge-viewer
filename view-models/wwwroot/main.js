@@ -92,7 +92,7 @@ async function onModelSelected(viewer, urn) {
         }
     } catch (err) {
         alert('Could not load model. See the console for more details.');
-        console.error(err);
+        
     }
 }
 

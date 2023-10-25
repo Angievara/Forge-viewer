@@ -3,7 +3,7 @@ const APS = require('forge-apis');
 const { APS_CLIENT_ID, APS_CLIENT_SECRET, APS_BUCKET } = require('../config.js');
 
 let internalAuthClient = new APS.AuthClientTwoLegged(APS_CLIENT_ID, APS_CLIENT_SECRET, ['bucket:read', 'bucket:create', 'data:read', 'data:write', 'data:create'], true);
-let publicAuthClient = new APS.AuthClientTwoLegged(APS_CLIENT_ID, APS_CLIENT_SECRET, ['viewables:read'], true);
+let publicAuthClient = new APS.AuthClientTwoLegged(APS_CLIENT_ID, APS_CLIENT_SECRET, ['viewables:read', 'data:read', 'account:read' ], true);
 
 const service = module.exports = {};
 
@@ -88,5 +88,26 @@ service.getManifest = async (urn) => {
         }
     }
 };
+
+service.getProjectContents = async () =>{
+    try{
+        const publicToken = await service.getPublicToken();
+        const internalToken = await service.getInternalToken();
+        const projectId = "b.ff8371d5-e990-44f6-8d54-adc6eda4531d"
+        
+        let internalAuthClientt= new APS.AuthClientTwoLegged(APS_CLIENT_ID, APS_CLIENT_SECRET, ['bucket:read', 'bucket:create', 'data:read', 'data:write', 'data:create'], true);
+        // const hub = await new APS.HubsApi().getHubs(null, internalAuthClientt, publicToken);
+        // // console.log('hubs', hub.body.data)
+        // const folders = await new APS.ProjectsApi().getProjectTopFolders(hub.body.data[0].id, projectId, internalAuthClientt, publicToken);
+        // console.log('folders', folders.body.data)
+        const folderId= 'urn:adsk.wipprod:fs.folder:co.g7sKvM0KRde7iF9-VIM1wA'
+        const resp = await new APS.FoldersApi().getFolderContents(projectId, folderId, null, internalAuthClientt, publicToken);
+        return resp.body.data;
+    }catch(err){
+            // console.log("error on project contents", err.response.data)
+            throw err;
+    
+    }
+}
 
 service.urnify = (id) => Buffer.from(id).toString('base64').replace(/=/g, '');

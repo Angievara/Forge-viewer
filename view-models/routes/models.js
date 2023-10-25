@@ -1,17 +1,24 @@
 const express = require('express');
 const formidable = require('express-formidable');
-const { listObjects, uploadObject, translateObject, getManifest, urnify } = require('../services/aps.js');
+const { listObjects, uploadObject, translateObject, getManifest, urnify,getProjectContents} = require('../services/aps.js');
 
 let router = express.Router();
 
 router.get('/api/models', async function (req, res, next) {
     try {
         const objects = await listObjects();
-        console.log(objects)
-        res.json(objects.map(o => ({
+        const other = await getProjectContents()
+        let all = objects.map(o => ({
             name: o.objectKey,
             urn: urnify(o.objectId)
-        })));
+        }))
+        console.log(other[0])
+        all.push( {
+            name : other[0].attributes.displayName,
+            urn: other[0].id
+        })
+        console.log(all)
+        res.json(all);
     } catch (err) {
         next(err);
     }

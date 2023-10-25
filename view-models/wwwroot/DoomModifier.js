@@ -11,7 +11,7 @@ function findPanel() {
             groups.forEach(group => {
                 // Check the lmv-nodeid attribute
                 let nodeId = group.getAttribute('lmv-nodeid');
-                if (nodeId !== 'IFC' && nodeId !== '413_Pset_Windows') {
+                if (nodeId !== 'IFC' && nodeId !== '413_Pset_Windows' && nodeId !== "Identity Data" && nodeId !== "IFC Parameters") {
                     group.remove();
                 }
             });

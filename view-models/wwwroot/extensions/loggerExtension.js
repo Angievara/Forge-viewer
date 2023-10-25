@@ -92,7 +92,7 @@ class LoggerExtension extends BaseExtension {
         let i = 0;
         let first5 = Buttons.slice(0, 5)
 
-        let rest = Buttons.slice(11)
+        let rest = Buttons.slice(12)
         first5.forEach(element => {
             if (i === 0) { element.setIcon('icon') }
             else { element.setIcon(`icon${i}`) }
