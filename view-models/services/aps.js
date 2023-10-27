@@ -7,6 +7,16 @@ let publicAuthClient = new APS.AuthClientTwoLegged(APS_CLIENT_ID, APS_CLIENT_SEC
 
 const service = module.exports = {};
 
+async function getJSON(url) {
+    const resp = await fetch(url);
+    if (!resp.ok) {
+        alert('Could not load tree data. See console for more details.');
+        console.error(await resp.text());
+        return [];
+    }
+    return resp.json();
+}
+
 service.getInternalToken = async () => {
     if (!internalAuthClient.isAuthorized()) {
         await internalAuthClient.authenticate();
@@ -102,7 +112,11 @@ service.getProjectContents = async () =>{
         // console.log('folders', folders.body.data)
         const folderId= 'urn:adsk.wipprod:fs.folder:co.g7sKvM0KRde7iF9-VIM1wA'
         const resp = await new APS.FoldersApi().getFolderContents(projectId, folderId, null, internalAuthClientt, publicToken);
-        return resp.body.data;
+        const itemId = resp.body.data[0].id;
+        const item = await new APS.ItemsApi().getItemVersions(projectId,itemId, null, internalAuthClient, publicToken)
+        const versions = item.body.data;
+        // console.log(versions)
+        return item.body.data;
     }catch(err){
             // console.log("error on project contents", err.response.data)
             throw err;

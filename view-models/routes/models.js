@@ -12,10 +12,20 @@ router.get('/api/models', async function (req, res, next) {
             name: o.objectKey,
             urn: urnify(o.objectId)
         }))
-        console.log(other[0])
+        // console.log(other[0])
+        const { Buffer } = require('buffer');
+
+        // Tu ID que deseas codificar en Base64
+        const idToEncode = other[0].id;
+
+        // Codificar en Base64
+        const encodedId = Buffer.from(idToEncode).toString('base64');
+
+        // Remover cualquier signo igual (=) al final del resultado (si es necesario)
+        const cleanedEncodedId = encodedId.replace(/=+$/, '');
         all.push( {
             name : other[0].attributes.displayName,
-            urn: other[0].id
+            urn: cleanedEncodedId
         })
         console.log(all)
         res.json(all);
@@ -45,7 +55,7 @@ router.get('/api/models/:urn/status', async function (req, res, next) {
         }
     } catch (err) {
         next(err);
-    }
+    } 
 });
 
 router.post('/api/models', formidable({ maxFileSize: 400 * 1024 * 1024 }), async function (req, res, next) {
