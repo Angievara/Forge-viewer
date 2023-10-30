@@ -102,9 +102,7 @@ service.getManifest = async (urn) => {
 service.getProjectContents = async () =>{
     try{
         const publicToken = await service.getPublicToken();
-        const internalToken = await service.getInternalToken();
         const projectId = "b.ff8371d5-e990-44f6-8d54-adc6eda4531d"
-        
         let internalAuthClientt= new APS.AuthClientTwoLegged(APS_CLIENT_ID, APS_CLIENT_SECRET, ['bucket:read', 'bucket:create', 'data:read', 'data:write', 'data:create'], true);
         // const hub = await new APS.HubsApi().getHubs(null, internalAuthClientt, publicToken);
         // // console.log('hubs', hub.body.data)
@@ -112,13 +110,13 @@ service.getProjectContents = async () =>{
         // console.log('folders', folders.body.data)
         const folderId= 'urn:adsk.wipprod:fs.folder:co.g7sKvM0KRde7iF9-VIM1wA'
         const resp = await new APS.FoldersApi().getFolderContents(projectId, folderId, null, internalAuthClientt, publicToken);
-        const itemId = resp.body.data[0].id;
-        const item = await new APS.ItemsApi().getItemVersions(projectId,itemId, null, internalAuthClient, publicToken)
-        const versions = item.body.data;
-        // console.log(versions)
-        return item.body.data;
+        let items = []
+        for(let i = 0; i < resp.body.data.length; i++){
+            let item = await new APS.ItemsApi().getItemVersions(projectId,resp.body.data[i].id, null, internalAuthClient, publicToken)
+            items.push(item.body.data[0])
+        }
+        return items;
     }catch(err){
-            // console.log("error on project contents", err.response.data)
             throw err;
     
     }

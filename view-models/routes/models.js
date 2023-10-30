@@ -1,6 +1,6 @@
 const express = require('express');
 const formidable = require('express-formidable');
-const { listObjects, uploadObject, translateObject, getManifest, urnify,getProjectContents} = require('../services/aps.js');
+const { listObjects, uploadObject, translateObject, getManifest, urnify, getProjectContents } = require('../services/aps.js');
 
 let router = express.Router();
 
@@ -12,22 +12,16 @@ router.get('/api/models', async function (req, res, next) {
             name: o.objectKey,
             urn: urnify(o.objectId)
         }))
-        // console.log(other[0])
         const { Buffer } = require('buffer');
-
-        // Tu ID que deseas codificar en Base64
-        const idToEncode = other[0].id;
-
-        // Codificar en Base64
-        const encodedId = Buffer.from(idToEncode).toString('base64');
-
-        // Remover cualquier signo igual (=) al final del resultado (si es necesario)
-        const cleanedEncodedId = encodedId.replace(/=+$/, '');
-        all.push( {
-            name : other[0].attributes.displayName,
-            urn: cleanedEncodedId
-        })
-        console.log(all)
+        other.forEach(element => {
+            let idToEncode = element.id;
+            let encodedId = Buffer.from(idToEncode).toString('base64');
+            let cleanedEncodedId = encodedId.replace(/=+$/, '');
+            all.push({
+                name: element.attributes.displayName,
+                urn: cleanedEncodedId
+            })
+        });
         res.json(all);
     } catch (err) {
         next(err);
@@ -55,7 +49,7 @@ router.get('/api/models/:urn/status', async function (req, res, next) {
         }
     } catch (err) {
         next(err);
-    } 
+    }
 });
 
 router.post('/api/models', formidable({ maxFileSize: 400 * 1024 * 1024 }), async function (req, res, next) {
